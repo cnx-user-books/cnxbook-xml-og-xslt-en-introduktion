@@ -1,0 +1,167 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>XML - grundlaget</title>
+  <metadata>
+  <md:content-id>m19606</md:content-id><md:title>XML - grundlaget</md:title>
+  <md:abstract>En gennemgang af det elementære grundlag for opmærkning i XML og opbygningen af et XML-dokument</md:abstract>
+  <md:uuid>8256a373-e270-4633-868a-ee4078cfd44f</md:uuid>
+</metadata>
+
+<content>
+    <section id="id20155387">
+      <title>XML – GRUNDLAGET</title>
+      <section id="id22939570">
+        <title>1. XML – før vi starter</title>
+        <section id="id18731273">
+          <title>1.1 XML – eXtensible Markup Language</title>
+          <para id="id19700504">XML præsenteres generelt som et opmærkningssprog på lige fod med HTML. Der er altså i begge tilfælde tale om en form for sprog, de hedder begge <term>Markup Language</term>, og de bruger begge <term>tags</term> til opmærkning. Den samlede mængde af tags kaldes traditionelt for et <term>vokabular</term><emphasis effect="italics">.</emphasis></para>
+          <para id="id21019160">I XML udarbejder du dit eget vokabular. I HTML er der et foruddefineret vokabular, det vil sige en mængde gyldige, navngivede tags, som angiver hvordan data i et HTML-dokument skal præsenteres. Derfor vil man også møde de samme tags i stort set alle HTML-dokumenter. Formålet med et prædefineret vokabular er indlysende: en hvilken som helst browser kan genkende og fortolke de tags der forekommer i et dokument og vise indholdet i dokumentet i overensstemmelse hermed.</para>
+          <para id="id18794711">Et XML-vokabular udgøres af tags som er valgt og defineret med henblik på at fortælle noget om indholdet i data. Et XML-vokabular vil derfor være forskelligt fra det ene XML-dokument til det andet, afhængigt af de skiftende indhold som skal opmærkes. Der findes imidlertid regler for hvordan et XML-vokabular skal se ud, hvordan det skal struktureres. Disse regler – se dem i afsnit 3 i dette modul – udgør rygraden i XML.</para>
+          <para id="id18794714"> XML er et sæt <emphasis effect="italics">regler</emphasis> for opmærkning. Følger man disse regler bliver</para>
+          <para id="id22162765"> resultatet et velformet XML-dokument som gør det muligt at bygge,</para>
+          <para id="id21898042"> vedligeholde, udveksle og genbruge data. <footnote id="id20021700">“Strictly speaking, XML is not a markup language. A language has a fixed vocabulary and grammar, but XML doesn’t actually define any elements. Instead, it lays down a foundation of syntactic constraints on which you can build your own language.” Ray: <emphasis effect="italics">Learning XML</emphasis>, O’Reilly 2003, p.6</footnote></para>
+          <para id="id20171922">XML er således et <term>meta-sprog</term>, det vil sige et sprog som kan bruges af alle der gerne vil opmærke en eller flere tekster i deres eget opmærkningssprog. Men hvis man vil gøre sig forståelig for omverden, for eksempel fordi man vil distribuere sine opmærkede dokumenter, er det vigtigt at man overholder den særlige syntaks der gælder for XML. </para>
+        </section>
+        <section id="id23295617">
+          <title>1.2 XML-dokumentet</title>
+          <para id="id10253740">En opmærket tekst gemmes som et <emphasis effect="italics">XML-dokument</emphasis>. Et XML-dokument indeholder strukturerede data som i kraft af opmærkningen udgør <emphasis effect="italics">struktureret information</emphasis>.</para>
+          <para id="id11769069">Vi vil typisk opbevare et XML-dokument som en fil, en fysisk enhed gemt i et lager på en computer, hvorfor vi giver vores fil efternavnet *.xml. Men vi vil også gerne have at dokumentet, den logiske enhed, <emphasis effect="italics">informationsenheden</emphasis>, kan læses og genkendes som XML af en XML-processor. Det vil blandt meget andet sætte os i stand til at udveksle XML-dokumenter med andre brugere på tværs af computere, styresystemer og diverse andre teksnologiske restriktioner. For at opnå dette bliver nødt til at følge de regler som definerer hvad der gør strukturerede data til et <term>velformet</term> og <term>gyldigt</term> XML-dokument. </para>
+          <para id="id15542240">At et dokument er <emphasis effect="italics">velformet</emphasis> vil sige, at det overholder de syntaksregler der er defineret for XML. At et dokument er <emphasis effect="italics">gyldigt</emphasis> vil sige, at der foreligger en form for grammatik for opmærkningen og at den konkrete opmærkning er i overensstemmelse hermed. </para>
+          <para id="id23107408">En sådan grammatik, som definerer hvilke tags der må forekomme, hvor mange gange og i hvilken rækkefølge, kaldes her og i tilhørende moduler også for en informationsmodel <footnote id="id22166100">Begrebet <emphasis effect="italics">informationsmodel</emphasis> bruges her om den konceptuelle pendant til det som med en teknisk term i XML betegnes som en DTD: Document Type Definition. I modul 3 gennemgåes dette nærmere.</footnote>. Den særlige <emphasis effect="italics">syntaks</emphasis> som gælder for opbygning af informationsstrukturerne i et XML-dokument vil blive gennemgået i det følgende. Ønsker man at studere dette emne i en original version, anbefales det at starte på <link url="http://www.w3.org/">www.w3.org</link>. </para>
+        </section>
+      </section>
+      <section id="id21880422">
+        <title>2. Opmærkning med XML</title>
+        <section id="id15843344">
+          <title>2.1 Forlægget</title>
+          <para id="id9461032">Det er som det første vigtig at være opmærksom på, at man <emphasis effect="italics">ikke</emphasis> skal skrive sine XML-dokumenter i et tekstbehandlingsprogram. Et sådant program indsætter koder overalt i dokumentet, for linieskift, indrykning af afsnit og andet tilsvarende, og den XML-processor som skal tage hånd om dokumentet vil ikke acceptere disse koder. Det vil give en masse fejlmeddelelser. Brug derfor enten en almindelig teksteditor som for eksempel Notepad, eller find en XML-editor på nettet <footnote id="id19656114">Opmærkninger vist i dette og de øvrige moduler er foretaget ved hjælp af den særlige XML-editor Altova XMLSpy.</footnote>. </para>
+          <para id="id15753332">Udgangspunkt for gennemgangen af de basale byggeklodser i XML er følgende bogtitel fundet i Gentofte Kommunes online-katalog og her præsenteret i let bearbejdet version:</para>
+          <para id="id15753336"><figure id="fig.1">
+<label> Figur </label>
+<code id="fs-id10290551" display="block">
+Roman
+Anne Marie Løn
+Sekstetten 
+[Kbh.] : Gyldendal, 2008. - 550 sider
+ISBN 978-87-02-07227-3 : hf. : kr. 299,00.
+ISBN 978-87-02-07365-2 : ib. : kr. 349,00.
+
+</code>
+</figure></para>
+          
+          
+          
+          <para id="id9080517">Skal denne information omsættes til et XML-dokument, kunne resultatet være som </para>
+          <para id="id5644547">vist nedenfor: </para>
+          <para id="id5644550">1: &lt;?xml version="1.0" encoding="UTF-8" ?&gt; </para>
+          <para id="id22555354">2: &lt;bog&gt;</para>
+          <para id="id22555358">3: &lt;forfatter&gt;</para>
+          <para id="id15879148">4: &lt;fornavn&gt;Anne Marie&lt;/fornavn&gt; </para>
+          <para id="id19647801">5:  &lt;efternavn&gt;Løn&lt;/efternavn&gt;</para>
+          <para id="id21386556">6: &lt;/forfatter&gt;</para>
+          <para id="id18391738">7: &lt;titel&gt;Sekstetten&lt;/titel&gt;</para>
+          <para id="id16164369">8: &lt;forlag sted="København"&gt;Gyldendal&lt;/forlag&gt;</para>
+          <para id="id19328409">9: &lt;udg&gt;2008&lt;/udg&gt; </para>
+          <para id="id4416873">10 &lt;sidetal&gt;550&lt;/sidetal&gt; </para>
+          <para id="id18779878">11: &lt;ISBN&gt;</para>
+          <para id="id10750477">12: &lt;heftet pris=" 299,00"&gt;978-87-02-07227-3&lt;/ heftet&gt;</para>
+          <para id="id6189670">13: &lt;indbundet pris="349,00"&gt;978-87-02-07365-2&lt;/ indbundet &gt;</para>
+          <para id="id10750532">14: &lt;/ISBN&gt;</para>
+          <para id="id20442345">15: &lt;genre&gt;roman&lt;/genre&gt; </para>
+          <para id="id15978054">16:&lt;/bog&gt;</para>
+          <para id="id15978058"/>
+          <para id="id23027524">  fig. 2: sekstetten.xml</para>
+        </section>
+        <section id="id21808616">
+          <title>2.2 XML – sproget</title>
+          <para id="id21332697">Et XML-dokument består af en <term>prolog</term> og et antal <term>elementer</term><emphasis effect="italics">.</emphasis> I en prolog placerer man alle de instrukser som specificerer hvordan dokumentet skal behandles, for eksempel en grammatik for dokumentet. Her angiver man også om for eksempel et style-sheet skal inddrages i den aktuelle kørsel. Prologen er altid det første man møder i et XML-dokument.</para>
+          <para id="id20149684">2.2.1 Prologen</para>
+          <para id="id19647435">Som det allerførste i linie 1 i sekstetten.xml er der i prologen placeret en såkaldt <term>deklaration</term>:</para>
+          <para id="id21019143"> 1:  &lt;?xml version=”1.0” encoding=”UTF-8” ?&gt;</para>
+          <para id="id20454455">Her defineres at der er tale om XML og at der anvendes version nummer 1.0. Endvidere defineres et tegnsæt og dermed mængden af tegn som processoren kan genkende<footnote id="id6561418">UTF-8 = USC Transformation Format (Unicode Standard Characters) for 8 bit</footnote>. I denne mængde indgår blandt andet de danske tegn <emphasis effect="italics">æ, ø, å</emphasis> og det gør dermed tilværelsen lettere for alle dansktalende brugere af XML.</para>
+          <para id="id21165472">Anvendelsen og placeringen af spørgsmålstegn definerer en såkaldt <emphasis effect="italics">processing instruction </emphasis>(PI), det vil sige at alle informationer her er systemorienterede, at de ikke indgår i selve XML-dokumentet og derfor ikke skal godkendes som velformede af XML-processoren. </para>
+          <para id="id10193103">Resten af dokumentet er bygget op ved brug af de grundlæggende og klassiske byggeklodser i XML, som introduceres nedenfor. </para>
+          <para id="id21840135">2.2.2 Elementer</para>
+          <para id="id19247068">Den grundlæggende byggeklods i XML er <emphasis effect="italics">elementet</emphasis>. Et element består af en <term>starttag</term><emphasis effect="italics">,</emphasis> for eksempel &lt;fornavn&gt;, og en tilhørende <term>sluttag</term>, &lt;/fornavn&gt; som vist i linie 4. En sluttag kender vi på tegnet ’/’. Mellem disse tags finder vi elementets <term>indhold</term>, forfatterens fornavn. Et element i XML udgøres altså af en starttag, af et indhold, og af en sluttag. Ud fra denne betragtning kaldes et element ofte for en <emphasis effect="italics">container</emphasis>. </para>
+          <para id="id20433301">Et element skal have et <term>navn</term>. Det er dig som opmærker der bestemmer, hvad elementet skal hedde, og det er ikke mindst på dette punkt at XML adskiller sig fra HTML. Antallet af navngivne elementer udgør det samlede XML-vokabular.</para>
+          <para id="id18158649">I sekstetten.xml finder vi i linie 4 og 5 elementerne FORNAVN og EFTERNAVN <footnote id="id12059181">Når vi fremover i teksten omtaler elementer, skrives elementets navn i versaler</footnote>:</para>
+          <para id="id13133604"> 4: &lt;fornavn&gt;Anne Marie&lt;/fornavn&gt;</para>
+          <para id="id16416994"> 5: &lt;efternavn&gt;Løn&lt;/efternavn&gt;</para>
+          <para id="id17698594">Elementer af denne art kalder vi for <term>tekstelementer</term><emphasis effect="italics">,</emphasis> da indholdet i elementet er ren tekst. Indholdet i FORNAVN er tekststrengen ’Anne Marie’, og tilsvarende er indholdet i elementet EFTERNAVN tekststrengen ’Løn’.</para>
+          <para id="id21009750">I linie 3 finder vi en starttag til elementet FORFATTER, den tilhørende sluttag står i linie 6. Lad os se lidt nærmere på indholdet i dette element:</para>
+          <para id="id16229674"> 3: &lt;forfatter&gt;</para>
+          <para id="id21925869"> 4: &lt;fornavn&gt;Anne Marie&lt;/fornavn&gt;</para>
+          <para id="id21766196"> 5: &lt;efternavn&gt;Løn&lt;/efternavn&gt;</para>
+          <para id="id18811870"> 6: &lt;/forfatter&gt;</para>
+          <para id="id18740663">Elementet FORFATTER indeholder ikke tekst, men derimod tekstelementer, elementerne FORNAVN og EFTERNAVN. Vi siger at disse elementer er <emphasis effect="italics">indlejret</emphasis> (eng. embedded) i elementet FORFATTER. </para>
+          <para id="id19329299"/>
+          <para id="id15866791">Et element der som indhold har et eller flere andre elementer, kalder vi for et <term>strukturelement</term>. </para>
+          <para id="id6889486">Strukturelementer skal, som navnet angiver, skabe struktur i informationsmængden. Strukturen kan vi i dette tilfælde definere som <emphasis effect="italics">en relation</emphasis>, en relation mellem elementer og anførte informationer: at en forfatter er en person som har et fornavn og et efternavn. Eller, på en anden måde, at FORNAVN og EFTERNAVN er egenskaber ved en FORFATTER.</para>
+          <para id="id14914265">Der findes et yderligere og specielt strukturelement i dokumentet: elementet BOG. Ser vi nærmere efter, viser det sig at <emphasis effect="italics">hele dokumentet</emphasis>, fra linie 2 til og med linie 16, er ét enkelt element, eller én enkelt container kaldet BOG. Dette element indeholder hele det samlede XML-dokument. Et element som indeholder det samlede XML-dokument, kalder vi for dokumentets <term>rodelement</term>.<footnote id="id15533612">Når vi betegner dokumentet som den samlede mængde elementer fra linie 2 til og med linie 16, skyldes det at XML-deklarationen er optionel, at den altså strengt taget ikke er nødvendig.</footnote> Vi skal senere se hvordan man kan udnyttet rodelementet til at få fat i hele indholdet i et XML-dokument.</para>
+          <para id="id18118538">Der findes en tredie form for element: det tomme element. Der er ikke noget tomt element i vores dokument. Vi skal senere se nogle tilfælde, hvor det er nyttigt at gøre brug af tomme elementer.</para>
+          <para id="id19563523">2.2.3 Attributter</para>
+          <para id="id6618329">Elementet FORLAG er udformet på en speciel måde. Der er tale om et tekstelement, en container, som vi bruger til at anføre navnet på det forlag som er ansvarlig for udgivelsen. Men i elementets starttag er der indbygget mere information, en angivelse af hvor det aktuelle forlag findes:</para>
+          <para id="id23123333">8: &lt;forlag sted="København"&gt;Gyldendal &lt;/forlag&gt;</para>
+          <para id="id6041084">Information angivet på denne måde i en starttag kalder vi for et <term>attribut</term>.</para>
+          <para id="id21907895">Et attribut er generelt en karakteristisk bestemmelse af en person eller et begreb. Et attribut i XML er supplerende information som karakteriserer det element som attributtet er knyttet til og eventuelle data indeholdt i elementet. Det er med andre ord data om data, det vi også kalder for <term>metadata</term>. I det aktuelle tilfælde, i linie 8, er det data som karakteriserer forlaget med hensyn til beliggenhed, at der er tale om forlaget Gyldendal i København, og ikke Gyldendal i Oslo.</para>
+          <para id="id18171122">Et attribut skal have et <term>navn</term> – navnet bestemmer du – og en tilhørende <term>værdi</term><emphasis effect="italics">.</emphasis> Det er værdien som specificerer data. Et forlag, alle forlag, er hjemmehørende et bestemt sted, og det konkrete forlag Gyldendal ligger i København:</para>
+          <para id="id19191697">  sted=”København”</para>
+          <para id="id21305364">Navnet på dette attribut er ’<emphasis effect="italics">sted</emphasis> ’og værdien knyttet hertil er ’<emphasis effect="italics">København’</emphasis>. Læg mærke til at man anvender tegnet ’=’ til at forbinde navnet på et attribut med attributets værdi, og at værdien er anført i dobbelte citationstegn.</para>
+          <para id="id22537690">I sekstetten.xml er der ligeledes brugt attributter i elementerne HEFTET og INDBUNDET til at angive to forskellige priser (linie 12 g 13). Hvornår man skal placere sine informationer i et element og hvornår de hører hjemme som et eller flere attributter, er en afgørelse som træffes af den der opmærker og som ofte er genstand for megen diskussion. Man kan for eksempel diskutere, om SIDETAL (linie 10) skal være et selvstændigt element – kan man på et tidspunkt have glæde af denne oplysning som selvstændig enhed ? – eller om det burde optræde som attribut. Og hvor skulle det så placeres ?</para>
+          <para id="id15959305">De øvrige elementer i dokumentet giver ikke anledning til yderligere kommentarer. Alt i alt er der således</para>
+          <para id="id15959310"> 3 strukturelementer:  BOG, FORFATTER og ISBN</para>
+          <para id="id15669711"> 9 tekstelementer:  FORNAVN, EFTERNAVN, TITEL, FORLAG, UDG    (=udgivelse), HEFTET, INDBUNDET,  SIDETAL,     GENRE</para>
+          <para id="id13609878"> 3 attributter:  STED, HEFTET, INDBUNDET</para>
+        </section>
+      </section>
+      <section id="id10502306">
+        <title>3. Syntaks</title>
+        <para id="id23017614">For at kunne tale om et velformet XML-dokument, skal der gælde følgende:</para>
+        <list id="id16923992" list-type="enumerated" number-style="arabic">
+          <item>Et XML-dokument bør starte med en XML-deklaration, og denne skal i så fald være placeret som det allerførste i dokumentet</item>
+          <item>Et XML-dokument skal indeholde ét element som indeholder samtlige andre elementer i dokumentet. Dette element kaldes for rodelementet</item>
+          <item>Et element i XML skal have både en starttag og en sluttag</item>
+          <item>Navnet på start- og sluttag skal matche fuldstændigt</item>
+          <item>Navnet i en tag må ikke indeholde blanke tegn (mellemrum), men man kan i stedet bruge underscore</item>
+          <item>Navnet på en tag må ikke begynde med et tal</item>
+          <item>Værdierne anført i et attribut skal anføres i dobbelte citationstegn (jf ovenfor)</item>
+        </list>
+        <para id="id23016950">At et XML-dokument er <emphasis effect="italics">velformet</emphasis> vil sige, at ovennævnte regler er overholdt. Der findes imidlertid en række typiske fejl, fejl som man måske ikke selv får øje på i første omgang, men som fremkommer som en fejlmeddelelse fra processoren når man vil have testet om et dokument er velformet. Regel nummer 4 er nok den regel man lettest kan komme til at forsynde sig imod. Men heldigvis er xml-processoren ekstremt sensitiv, og den vil give besked på skærmen når der er tale om en syntaksfejl og angive nummeret på linien i dokumentet hvor der er en fejl.</para>
+        <para id="id16299669">De følgende eksempler overholder ikke reglerne 4-6 (og er derfor forsynet med en *):</para>
+        <para id="id16299674">1: * &lt;Fornavn&gt; Niels &lt;/fornavn&gt; </para>
+        <para id="id12160506">2: * &lt;fornavn&gt; Niels &lt;/navn&gt;</para>
+        <para id="id12115435">3: * &lt;titel&gt; Sekstetten &lt;titel&gt;</para>
+        <para id="id22650030">4: * &lt;ISBN nummer&gt; 123456789 &lt;/ISBN_nummer&gt;</para>
+        <para id="id16923871">5: * &lt;6_række&gt; 6 &lt;/6_række&gt;</para>
+        <para id="id18816969">Der er tale om følgende fejl:</para>
+        <para id="id14434242"/>
+        <para id="id14434246">1: der er brugt ’F’ og ’f’ i navnet, de matcher ikke</para>
+        <para id="id21331142">2: &lt;fornavn&gt; matcher ikke med &lt;/navn&gt;</para>
+        <para id="id22421770">3: tegnet ’/’ mangler i sluttag</para>
+        <para id="id19287886">4: der er en blank i starttag</para>
+        <para id="id18782952">5: navnet på en tag må ikke begynde med et tal</para>
+        <para id="id18034507">Udover syntaksfejl forekommer en anden type fejl, fejl som ikke fanges af processoren, fordi der er tale om <emphasis effect="italics">logiske fejl</emphasis>. Logiske fejl hænger sammen med opmærkningen og opbygningen af dokumentet. Det kan for eksempel være, at man fejlagtigt anfører forfatterens fornavn som efternavn og efternavnet som fornavn. Den slags fejl skal fanges af den menneskelige processor.</para>
+        <section id="id15925319">
+          <title>4. Test dig selv</title>
+          <list id="id15697645" list-type="bulleted">
+            <item>I sekstetten.xml er GENRE et selvstændigt element med indholdet <emphasis effect="italics">roman</emphasis>. Denne information kan også anføres som et attribut. Hvor vil du placere dette attribut ?</item>
+            <item>Giv et forslag til opmærkning af følgende bogtitel:</item>
+          </list>
+          <para id="id13310964">Torgny Lindgren</para>
+          <para id="id16665302">Norrlands Akvavit</para>
+          <para id="id13365792">
+            <emphasis effect="bold">Samleren 2008</emphasis>
+          </para>
+          <para id="id10743079">org.: Norrlands Akvavit 2007</para>
+          <para id="id20248588">overs.: Karsten Sand</para>
+          <para id="id8197391">Torgny Lindgren (f. 1938) er en af Sveriges helt store forfattere og desuden medlem af Det Svenske Akademi, som uddeler Nobelprisen i litteratur. Hans forfatterskab tæller titler som Batseba, I brogede Blades vand, Pölsa og Dorés Bibel.
+</para>
+          
+          <para id="id16042400">416 sjæle! 416 sjæle frelste Olof Helmersson for 50 år siden i et dalstrøg i Västerbotten. Med livfulde ord og store armbevægelser, inderlighed og harmonikaspil ledte han sin flok. Helmersson var vækkelsens konge.
+Tanken om de 416 sjæle har boet i ham lige siden, også da han forlod de helliges forsamling og fik job på et sindsygehospital. Og tanken har plaget ham. Så meget, efterhånden, at der skal gøres op. Så den 83-årige Helmersson vender tilbage og slår sig ned hos Ivar og Asta og gør sig klar til at møde de vakte. Men det går ikke helt efter planden og Helmerssons hoved.
+
+</para>
+        </section>
+      </section>
+    </section>
+  </content>
+</document>

@@ -1,0 +1,70 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Hvad består et XML-til-HTML XSLT-stylesheet af?</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>9fc9b046-e2e5-405b-ba75-2f7df907fb94</md:uuid>
+</metadata>
+  <content>
+
+<para id="p1"><title>Introduktion</title>
+
+Et <term>XSLT-stylesheet</term> kan beskrives som en samling af regler, der beskriver, hvordan et (sæt af) XML-dokument(er) skal konverteres. Mere præcist foreskriver et XSLT-stylesheet, hvordan en given XML-struktur skal <emphasis>transformeres</emphasis> til en anden informationsstruktur. Denne struktur kan være en anden XML-struktur, det kan være HTML, eller det kan være almindelig tekst. En transformation ved hjælp af XSLT kan også beskrives som et udtræk af udvalgte XML-data og indsættelse af disse data i et nyt dokument.</para>
+
+<para id="p2">XSLT-stylesheets bruges meget ofte til at konvertere XML-dokumenter til HTML, således at disse kan vises som websider. Et XSLT-stylesheet til transformation af XML til HTML kunne f.eks. være nedenstående, som specificerer, hvordan data i et "XML-kildedokument" skal udtrækkes og vises i HTML. (Kildedokumentet kan ses <link document="m19297" target-id="c3">her</link>.)</para>    
+
+<code display="block" id="idp7411184">
+
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0"&gt;
+&lt;xsl:template match="/"&gt;
+    &lt;html&gt;
+      &lt;head&gt;
+        &lt;title&gt;Pressemeddelelse&lt;/title&gt;
+       &lt;/head&gt;
+      &lt;body&gt;
+       &lt;p style="font-size:24"&gt;Pressemeddelelse&lt;/p&gt;
+       &lt;p align="right"&gt;&lt;xsl:value-of select="pressemeddelelse/dato" /&gt;&lt;/p&gt;
+       &lt;p style="font-weight:bold; font-size:18"&gt;
+         &lt;xsl:value-of select="pressemeddelelse/overskrift" /&gt;&lt;/p&gt;
+       &lt;p&gt;&lt;i&gt;&lt;xsl:value-of select="pressemeddelelse/resume" /&gt;&lt;/i&gt;&lt;/p&gt;
+       &lt;p&gt;&lt;xsl:value-of select="pressemeddelelse/indhold" /&gt;&lt;/p&gt;
+       &lt;p&gt;&lt;b&gt;Kontakt:&lt;/b&gt;&lt;/p&gt;
+       &lt;p&gt;&lt;xsl:value-of select="pressemeddelelse/kontaktperson/fornavn" /&gt;
+         &lt;xsl:text&gt; &lt;/xsl:text&gt;
+       &lt;xsl:value-of select="pressemeddelelse/kontaktperson/efternavn" /&gt;
+         &lt;xsl:text&gt; &lt;/xsl:text&gt;
+      (email: &lt;xsl:value-of select="pressemeddelelse/kontaktperson/email" /&gt;)&lt;/p&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;
+  &lt;/xsl:template&gt;
+&lt;/xsl:stylesheet&gt;
+
+</code>
+
+<para id="p3"><title>Rodelement</title>
+
+Det første man skal bemærke er, at et XSLT-stylesheet i sig selv er et XML-dokument, selv om dette eksempel rent faktisk ikke indeholder en <term>XML-deklaration</term>. Alle XML-dokumenter har som bekendt et <term>rodelement</term>, det element, der indeholder alle de andre elementer, og det gælder således også for XSLT-stylesheets. I et XSLT-stylesheet er rodelementet normalt <code>&lt;xsl:stylesheet&gt;...&lt;/xsl:stylesheet&gt;</code>. Rodelementet indeholder, udover en versionsangivelse, også en såkaldt <term>name space deklaration</term>, nemlig <code>xmlns:xsl="http://www.w3.org/1999/XSL/Transform"</code>. Denne kode har blandt andet til formål at identificere alle de elementer i stylesheetet, som tilhører "XSLT name space", dvs. elementer, som har en særlig betydning eller funktion i XSLT. Rent konkret drejer det sig om alle de elementer, der har <term>præfixet</term> "xsl". Disse elementer udgør de egentlige instruktioner i programmet og omfatter foruden selve rodelementet eksempelvis <code>&lt;xsl:template&gt;</code> og <code>&lt;xsl:value-of&gt;</code>.</para>
+
+<para id="p4"><title>xsl:template</title>
+
+<code>&lt;xsl:template&gt;</code>-elementet omfatter et sæt af sammenhørende transformationsregler kaldet en <term>template rule</term>. I ovennævnte style sheet er der kun en template rule, men almindeligvis vil et XSLT-style sheet indeholde flere. <code>&lt;xsl:template&gt;</code>-elementet har en attribut, nemlig "match", der angiver den del af kildedokumentet, som skal transformeres. I dette tilfælde er værdien af attributten "/", hvilket lidt firkantet udtrykt betyder, at "hele kildedokumentet" skal behandles.</para>
+
+<para id="p5"><title>xsl:value-of</title>
+
+Et andet centralt xsl-element er <code>&lt;xsl:value-of&gt;</code>-elementet. Dette element bruges i XSLT til at angive hvilke data, der skal udtrækkes fra kildedokumentet. Selve identifikationen af data sker gennem attributten "select", der udpeger de relevante data og deres placering i kildedokumentet Et eksempel er f.eks. <code>select="pressemeddelelse/kontaktperson/efternavn"</code>. Med denne værdi anføres det altså, at indholdet af elementet "efternavn", som er underelement til elementet "kontaktperson", der igen er underelement til "pressemeddelelse", skal udtrækkes.</para>  
+
+
+<para id="p6"><title>Literal result</title>
+
+Mens elementer med præfixet "xsl" altså er de elementer i style sheetet, som angiver instruktioner i forbindelse med selve transformationen, angiver alle de andre <term>the literal result</term>, dvs. det output, som skal genereres. I eksemplet her er det med andre ord al HTML-koden så som (<code>&lt;html&gt;</code>,<code>&lt;body&gt;</code>, <code>&lt;p&gt;</code> og så videre. Selve koblingen mellem xsl-elementer og outputelementer sker ved, at de indlejres i hinanden. Et eksempel:</para>       
+
+<code display="block" id="idm1422320">
+
+         &lt;p&gt;&lt;i&gt;&lt;xsl:value-of select="pressemeddelelse/resume" /&gt;&lt;/i&gt;&lt;/p&gt;
+   
+
+</code>
+
+<para id="p7">Her er xsl-instruktionen <code>&lt;xsl:value-of select="pressemeddelelse/resume"&gt;</code> indlejret i HTML-koden <code>&lt;p&gt;&lt;i&gt;...&lt;/i&gt;&lt;/p&gt;</code>. Det betyder konkret, at indholdet af elementet "resume", der ligger i elementet "pressemeddelelse" udtrækkes fra kildedokumentet og præsenteres i et kursiveret afsnit. Med en metafor kan man sige, at XML-data udtrækkes og "pakkes ind" i HTML.</para>  
+  
+
+  </content>
+  
+</document>

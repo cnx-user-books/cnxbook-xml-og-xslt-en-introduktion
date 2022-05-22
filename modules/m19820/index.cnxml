@@ -1,0 +1,189 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Visning af XML med CSS</title>
+  <metadata>
+  <md:content-id>m19820</md:content-id><md:title>Visning af XML med CSS</md:title>
+  <md:abstract>En introduktion til styling af XML med CSS</md:abstract>
+  <md:uuid>c513acae-113f-4ae6-accc-291353e2c13c</md:uuid>
+</metadata>
+
+<content>
+    <section id="id46223330">
+      <title>Styling XML med CSS</title>
+      <para id="id46304152">Et XML-dokument indeholder data opmærket i XML, det vil sige i et sprog som overholder den syntaks som gælder for velformet XML. En fornuftig navngivning af tags gør det muligt for et menneske at læse og i vid udstrækning at forstå den information som er indeholdt i et XML-dokument. Normalt vælger man derfor sine tags i opmærkningen så de beskriver indholdet i de data der opmærkes. </para>
+      <para id="id46304159">En tekststreng som: ’Skrjabin’ siger ikke de fleste noget. Men hvis man i et XML-dokument støder på et element som: &lt;navn&gt; Skrjabin &lt;/navn&gt;, så er man formentlig straks klar over at der er tale om et navn. Og hvis man i et dokument støder på:</para>
+      <para id="id46346344"><figure id="fig1">
+<label>Figur</label>
+<code id="fs-id10290400" display="block">
+&lt;komponist&gt;
+   &lt;navn&gt; Skrjabin &lt;/navn&gt;
+&lt;/komponist&gt;
+</code>
+</figure></para>
+      
+      
+      <para id="id46339132">er det nu helt klart at der er tale om navnet på en komponist. På denne måde kan man med sin opmærkning gøre rå data, en tekststreng, til information, til navnet på en komponist.</para>
+      <para id="id45969075">Vi vil gerne præsentere denne information på skærmen i et brugervenligt format, uden tags og let at læse. Det kan vi gøre ved at udvikle og skrive et program, et såkaldt <emphasis effect="italics">stylesheet</emphasis>.</para>
+      <para id="id46302855">Et style-sheet er en fil som indeholder en række instrukser om hvordan elementerne i et XML-dokument skal formatteres og præsenteres. Vi skal se nærmere på et særligt sprog, <term>Cascading Style Sheets</term><emphasis effect="italics">, </emphasis>forkortet <term>CSS</term>, som kan bruges til at beskrive hvordan man ønsker indholdet i et XML-dokument præsenteret af en browser. Men først lidt XML kode som vi kan bruge som eksempel. CD-XML1:</para>
+      <para id="id46300943"><figure id="fig2">
+		<label>Figur</label>
+		<code id="fs-id10290441" display="block">
+&lt;cd&gt;
+	&lt;komponist&gt;Wolfgang Amadeus Mozart&lt;/komponist&gt;
+	&lt;værk&gt;	Violinkoncert Nr.3 G-dur	&lt;/værk&gt;
+	&lt;opførelse&gt;
+		&lt;orkester&gt;Berliner Philharmoniker&lt;/orkester&gt;
+		&lt;dirigent&gt;Herbert von Karajan&lt;/dirigent&gt;
+		&lt;solist&gt;Anne-Sophie Mutter&lt;/solist&gt;
+	&lt;/opførelse&gt;
+	&lt;indspilning&gt;DGG 1978&lt;/indspilning&gt;
+&lt;/cd&gt;
+</code>
+	</figure>
+</para>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <para id="id46288090">Denne kode kunne være en del af et cd-onlinekatalog. Vores ambitionen er at give en potentiel kunde en anstændig præsentation af indholdet, som for eksempel:</para>
+      <para id="id46288098">
+        <emphasis effect="bold">Wolfgang Amadeus Mozart</emphasis>
+      </para>
+      <para id="id46302982">  Violinkoncert Nr.3 G-dur </para>
+      <para id="id45890158">  Berliner Philharmoniker </para>
+      <para id="id45576194">  Herbert von Karajan </para>
+      <para id="id45969800">  Anne-Sophie Mutter </para>
+      <para id="id46288454">  DGG 1978</para>
+      <section id="id46027359">
+        <title>Styling med CSS</title>
+        <para id="id46027365">Et stylesheet i CSS består af en eller flere <term>regler</term>. En regel i CSS skal være velformet, det vil sige at den skal overholde den særlige syntaks som gælder for CSS.Hver regel definerer hvordan et eller flere elementer i et tilknyttet XML-dokument skal præsenteres. En velformet regel bygges som vist i R1:</para>
+        <para id="id46345403"><figure id="fig3">
+		<label>Figur</label>
+		<code id="fs-id10290442" display="block">
+komponist
+{	
+	display:block;
+	font-weight: bold;
+	font-size:16pt;
+}
+</code>
+	</figure>
+</para>
+        
+        
+        
+        
+        
+        <para id="id45916425">Som det første i en regel anføres en <term>selector</term>. En selector angiver navnet på det element i XML-dokumentet som skal formatteres, i det aktuelle tilfælde altså elementet KOMONIST. Indholdet i reglen, instrukserne om hvad der skal ske med elementet, skal for alle reglers vedkommende anføres mellem en start-klammer: { , og en slut-klammer: }. Dette indhold kaldes også for en <term>deklarationsblok</term> og den består af en eller flere <term>deklarationer</term> eller – mere informativt – af instrukser.</para>
+        <para id="id45689877">En instruktion i en regel følger et ganske bestemt mønster. Den består af et <term>attribut</term> og en <term>værdi</term>. Attribut og værdi adskilles fra hinanden med et kolon, og hele instruksen afsluttes med et semikolon. </para>
+        <para id="id46030972">Med attributtet angiver man <emphasis effect="italics">hvilken type</emphasis> formattering man ønsker at gennemføre, og med værdien angives <emphasis effect="italics">hvordan</emphasis> formatteringen skal gennemføres. Reglen R1 ovenfor indeholder således følgende instrukser:</para>
+        <para id="id46345529">1: display : block; indsæt linieskift før og efter elementets indhold</para>
+        <para id="id46028830">2: font-weight : bold; vis indholdet i bold</para>
+        <para id="id46089597">3: font-size : 16pt; sæt tegnstørrelsen til 16</para>
+        <para id="id45496309">Med regel R1 får vi med andre ord vist navnet på komponisten i bold, med et linieskift før og efter teksten. Læg mærke til at reglen viser hele indholdet i elementet KOMPONIST, vi behøver ikke at angive at der er tale om et navn.</para>
+        <para id="id46331497">Man kan i en selector også angive indtil flere elementer som skal formatteres ens, som vist med regel R2:</para>
+        <para id="id45729758"><figure id="fig4">
+		<label>Figur </label>
+		<code id="fs-id10290444" display="block">
+orkester,dirigent,solist
+{	
+	display:block;
+	font-size:12pt;
+}
+</code>
+	</figure>
+</para>
+        
+        
+        
+        
+        <para id="id46291276">Denne regel vil formattere indholdet i elementerne ORKESTER, DIRIGENT, SOLIST ud fra instrukserne angivet i deklarationsblokken: der skal et linieskift ind før og efter hvert element, og indholdet i alle elementer skal skrives med tegnstørrelsen 12, ganske som vist i eksemplet ovenfor. Læg mærke til at vi ikke behøver at angive at elementerne er placeret i elementet OPFØRELSE.</para>
+        <para id="id46318187">Der er mange muligheder for at variere præsentationen. En blandt flere er at angive en bestemt farve på skriften. En anden udgave af R1:</para>
+        <para id="id46086426"><figure id="fig5">
+		<label>Figur</label>
+		<code id="fs-id10290445" display="block">
+komponist
+{	
+	display:block;
+	font-weight: bold;
+	font-size:16pt;
+         color:red;
+}
+</code>
+	</figure>
+</para>
+        
+        
+        
+        
+        
+        
+        <para id="id46311446">vil resultere i at navnet på komponisten skrives med <emphasis effect="italics">rød</emphasis> skrift, og en udvidelse af R2:</para>
+        <para id="id46207991"><figure id="fig6">
+		<label>Figur</label>
+		<code id="fs-id10290446" display="block">
+orkester,dirigent,solist
+{	
+	display:block;
+	font-size:12pt;
+         color:blue;
+}
+</code>
+	</figure>
+</para>
+        
+        
+        
+        
+        
+        <para id="id46025823">vil medføre at teksten i de anførte elementer fremtræder i blå skrift.</para>
+        <para id="id46025830">CSS er et effektiv sprog som er ret enkelt at arbejde med. Det har dog også nogle ulemper, som man skal være opmærksom på. Vil du vide mere om CSS kan du kigger her: <link url="http://www.w3.org/TR/REC-CSS1">www.w3.org/TR/REC-CSS1</link> . </para>
+        <para id="id46306114"><emphasis effect="bold"> Linking XML og CSS </emphasis></para>
+        <para id="id46306118">For at få XML og CSS til at samarbejde, skal man linke sit stylesheet til det XML-dokument som skal formatteres. Formålet med dette er at få den browser, man anvender, til at fortolke reglerne i det tilknyttede stylesheet og bruge dem på XML-dokumentet. Vi anvender CD-XML1 som dokument:</para>
+        <para id="id46022355"><figure id="fig7"> 
+<label>Figur</label>
+		<code id="fs-id10290447" display="block">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;?xml-stylesheet type="text/css" href="cd_onlinekatalog.css"?&gt;
+&lt;cd&gt;
+	&lt;komponist&gt;Wolfgang Amadeus Mozart&lt;/komponist&gt;
+	&lt;værk&gt;	Violinkoncert Nr.3 G-dur	&lt;/værk&gt;
+	&lt;opførelse&gt;
+		&lt;orkester&gt;Berliner Philharmoniker&lt;/orkester&gt;
+		&lt;dirigent&gt;Herbert von Karajan&lt;/dirigent&gt;
+		&lt;solist&gt;Anne-Sophie Mutter&lt;/solist&gt;
+	&lt;/opførelse&gt;
+	&lt;indspilning&gt;DGG 1978&lt;/indspilning&gt;
+&lt;/cd&gt;
+</code>
+	</figure>
+</para>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <para id="id46303894">Som det fremgår, er der nu tilføjet en prolog, hvor vi (1) deklarerer den version af XML som anvendes og det tegnsæt som skal bruges, og (2) skaber en forbindelse til det stylesheet som skal bruges:</para>
+        <para id="id45724800"> &lt;?xml-stylesheet type="text/css" href="cd_katalog.css"?&gt;</para>
+        <para id="id46307271">Her angives at typen er en tekstfil indeholdende CSS, og vi angiver en <emphasis effect="italics">adresse</emphasis> på filen og dens navn. I dette tilfælde ligger XML-dokumentet og vores CSS stylesheet i samme mappe. Med tilføjelsen af denne prolog vil et klik på XML-dokumentet give følgende resultat:</para>
+
+<media id="css" display="block" alt="Visning af XML-dokument med CSS-stylesheet">
+  <image mime-type="image/gif" src="../../media/css.gif"/>
+</media>
+
+
+               <para id="id45485974">Vil du vide mere om de mange muligheder for at udnytte forskellige former for styling med CSS og hvordan man kan kombinere CSS og HTML, er der flere muligheder: <link url="http://www.w3.org/MarkUp/Guide/Style">www.w3.org/MarkUp/Guide/Style</link> eller <link url="http://www.w3.org/Style/CSS/learning">www.w3.org/Style/CSS/learning</link> .</para>
+      </section>
+    </section>
+  </content>
+</document>

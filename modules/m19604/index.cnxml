@@ -1,0 +1,116 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Opmærkning og opmærkningssprog - om HTML og XML</title>
+  <metadata>
+  <md:content-id>m19604</md:content-id><md:title>Opmærkning og opmærkningssprog - om HTML og XML</md:title>
+  <md:abstract>Introduktion til og diskussion af opmærkning med HTML og XML</md:abstract>
+  <md:uuid>f8380a58-617c-437a-b622-b471cc0e329b</md:uuid>
+</metadata>
+
+<content>
+              <section id="id7320681">
+        <title>Lidt om hjemmesider og opmærkning</title>
+        <para id="id7320692">Vi har alle adskillige gange besøgt en hjemmeside i vores jagt på informationer når vi søger oplysninger om personer, produkter eller ord og begreber som vi ikke forstår. Vi er så vant til at bevæge os i cyberspace og til at besøge hjemmesider, at vi ikke opfatter det som anvendt teknologi, ikke tænker over hvad der gemmer sig bag en hjemmeside og hvordan den er bygget op. Men vi har nogle ganske præcise forventninger til en hjemmeside: den skal indeholde de informationer vi søger, og de skal være let tilgængelige. Derfor er vi heller ikke sene til at fælde dom over en hjemmeside hvis vi bliver skuffede: ”Den er kedelig, den gider jeg ikke besøger igen!”, ”Den indeholder ikke de oplysninger jeg søger!”, ”Den er svær at bruge!”.</para>
+        <para id="id7320723">En hjemmeside er et udstillingsvindue, det sted hvor en leverandør præsenterer sine produkter for sine kunder, og stedet hvor man gerne skulle få nye kunder. Det er derfor vigtigt at en hjemmeside på en og samme tid er smart, indbydende, let at bruge og informativ. Det stiller store krav til <term>design</term>, til opbygning og indretning af hjemmesiden. De centrale informationer skal placeres det rigtige sted på siden – eller siderne – og det skal være nemt at bevæge sig rundt og komme fra et sted til et andet på en hjemmeside. Og det hele skal samtidig være overskueligt, ligesom der skal være en naturlig sammenhæng mellem informationer som præsenteres samme sted.</para>
+        <para id="id7320755">Når man leder efter en hjemmeside, bruger man en <term>browser</term><emphasis effect="italics"><footnote id="id7320771">En af de mest anvendte browsere er <emphasis effect="italics">Interne Explorer</emphasis> fra Microsoft</footnote></emphasis><emphasis effect="italics">,</emphasis> et program som kan finde og fortolke indholdet på en hjemmeside. Det sprog man anvender når man bygger sin hjemmeside, skal derfor helst være et sprog der ikke er afhængigt af at bruger anvender en bestemt type computer eller en bestemt browser. Lige netop sådan et sprog er HTML, en forkortelse der dækker over <term>HyperText Markup Language.</term></para>
+        <para id="id7320812">At en hjemmeside er <emphasis effect="italics">HyperText</emphasis> vil sige, at det er tekst som ikke er bundet til papir, ikke er bundet af en lineær præsentation og læsning fra venstre mod højre. Man kan derimod bevæge sig frit i teksten, udnytte links og henvisninger og springe fra et sted i teksten til et<emphasis effect="italics"/>andet ved at klikke på et ord, en illustration eller på en adresse til en anden hjemmeside. </para></section>
+        <section id="id7321015">
+          <title>Om opmærkning og opmærkningssprog</title>
+          <para id="id7321023">At HTML er et <term>Markup Language</term> vil sige at det er et sprog som man bruger til at forsyne en tekst med markører. Vi siger også at HTML er et <emphasis effect="italics">opmærkningssprog</emphasis>. </para>
+          <para id="id7321043"/>
+          <para id="id7321057">Helt konkret og bogstaveligt går opmærkning derfor ud på at indsætte markører (eng. <emphasis effect="italics">tags</emphasis>) i en tekst. Bruger vi HTML som opmærkningssprog, kan vi slå mængden af mulige markører og deres betydning op i en særlig HTML-ordbog. </para>
+          <para id="id7321075">Opmærkning svarer på mange måder til vores brug af et tekstbehandlingssystem når vi ønsker at fremhæve og udskille vigtige dele i en tekst som for eksempel i:</para>
+          <para id="id7321084">
+          <figure id="fig1">
+          <label>Figur</label>
+          <code id="fs-id10290447" display="block">        
+          Eric T. Ray
+          Learning XML
+          O’Reilly 2003 
+          </code>
+          </figure></para>
+          <para id="id7321159">Vi bruger som noget helt naturligt forskellige indbyggede funktioner i det aktuelle tekstbehandlingssystem i vores opmærkning, det kan være fed skrift eller <emphasis effect="italics">italic</emphasis> og vi kan ændre på størrelsen af bogstaverne. Men mange gange bruger vi også eksplicitte markører, som for eksempel i:</para>
+           <para id="id73210843"><figure id="fig2">
+		<label>Figur</label>
+		<code id="fs-id102904474" display="block">
+	 Forfatter: Eric T. Ray
+          Titel: Learning XML
+          Forlag: O’Reilly 2003
+          Udg.: 2003 
+          </code>
+	</figure></para>
+                   <para id="id7321236">I ovenstående eksempel indsætter vi markører, <emphasis>Forfatter, Titel, Forlag</emphasis> og <emphasis>Udg.</emphasis>, for at gøre det lettere for læseren at forstå hvad det er for en type informationer der vises. </para>
+        </section>
+      
+      <section id="id7321258">
+        <title>HTML og XML</title>
+        <para id="id7321267">I det foregående afsnit er begrebet <emphasis effect="italics">opmærkning</emphasis> introduceret og HTML er beskrevet som et <emphasis effect="italics">opmærkningssprog</emphasis>. To eksempler, fig.1 og fig.2 illustrerer hvordan man kan bruge funktionerne i et tekstbehandlingssystem, fed skrift, skråskrift og skrifttyper, til opmærkning. De viser tillige at funktioner som ’indrykning’ og ’tekstbox’ også fungerer som en form for opmærkning, dvs som et middel til rent grafisk at fremhæve og tydeliggøre det centrale i den information som man formidler. De to eksempler illustrerer en yderligere og væsentlig forskel på måden at opmærke på. I fig. 2 er der indsat markører som beskriver indholdet i den information som præsenteres. Vi kan direkte aflæse af markørerne at ’Eric T. Ray’ er navnet på en forfatter og at ’Learning XML’ er titlen på en bog som han har skrevet. Denne information mangler i fig. 1, som alene fokuserer på den grafiske præsentation og på at adskille forfatter, titel og forlag fra hinanden ved hjælp af forskelle i skriften.</para>
+        <para id="id7321329">Denne forskel i fokus – præsentation over for indhold – genfinder vi i forskellen mellem HTML og XML, <term>eXtensible Markup Language</term>. </para></section>
+        <section id="id7321342">
+          <title>Hvad vil du fremhæve: præsentation eller indhold</title>
+          <para id="id7321351">HTML har som opmærkningssprog fokus på <emphasis effect="italics">præsentationen af informationer</emphasis>. Det er derfor det sprog vi bruger når vi bygger hjemmesider. XML har fokus på <emphasis effect="italics">indholdet</emphasis>. Det svarer ganske godt til forskellen mellem fig. 1 og fig. 2. Vi bruger XML og de markører vi sætter ind i teksten til at sige noget om indholdet: hvad handler det om, som i fig. 2, og modsat bruger vi HTML når vi lægger vægt på hvordan teksten skal fremstå og præsenteres. </para>
+          <para id="id7321387">Vi kan illustrere forskellen på følgende vis:</para>
+          
+          <figure id="fig3">
+		<label>Figur</label>
+		<code id="fs-id1029044742" display="block">
+          &lt;b&gt; Eric T. Ray &lt;/b&gt;
+          &lt;i&gt; Learning XML &lt;/i&gt;
+          &lt;p&gt; o’Reilly &lt;/p&gt;
+          &lt;font size=’-1´&gt; O’Reilly 2003 &lt;/font&gt;
+          </code>
+          </figure>
+          <para id="id7321430">I fig. 3 – lad os kalde det et HTML-dokument – er der brugt markører fra HTML til at præsentere en streng med fed skrift (l.1), med skråskrift (l.2) og til at nedsætte størrelsen på den anvendte skrifttype (l.4). Læg mærke til at en markør (eng. <emphasis effect="italics">tag</emphasis>) er omgivet af særlige tegn, tegnet &lt; som starten på en markør, og &gt; som afslutning. Markøren &lt;b&gt; angiver at skriften skal være fed (eng.<emphasis effect="italics">bold</emphasis>), og markøren &lt;i&gt; angiver at skiften skal fremstå som <emphasis effect="italics">italic</emphasis>. Med markøren &lt;p&gt; angives at der er tale om ren tekst, en (text)paragraph. Læg endvidere mærke til at en opmærkning altid bør omfatte en <term>startmarkør</term> og en <term>slutmarkør</term>. Slutmarkøren kender vi på syntaksen som for eksempel i &lt;/b &gt;. Opmærkningen &lt;b&gt; ... &lt;/b&gt; har således den effekt at alt hvad der står mellem startmarkøren og slutmarkøren bliver præsenteret med fed skrift.</para>
+          <para id="id7324819">Sammenfattende kan man sige, at når man opmærker i HTML, fungerer man som både en form for grafiker og som typograf. Når vi opmærker i XML, er fokus et andet. Da er det indholdet det gælder:</para>
+          
+            <figure id="fig4">
+		<label>Figur</label>
+		<code id="fs-id10290447412" display="block">
+             &lt;forfatter&gt; Eric T. Ray &lt;/forfatter&gt;
+             &lt;titel&gt; Learning XML &lt;/titel&gt;
+             &lt;forlag&gt; O’Reilly &lt;/forlag&gt;
+             &lt;udg&gt; 2003 &lt;/udg&gt;
+             </code>
+               </figure>                          
+     
+          <para id="id7324866">De markører som er brugt i fig. 4 – lad os kalde det et XML-dokument – siger alene noget om hvad det er for en type information der står mellem de to markører, hvad data mellem start- og slutmarkør handler om.</para>
+          <para id="id7324878">Vi kan sammenfattende karakterisere forskellen mellem HTML og XML som en forskel mellem valg af <emphasis effect="italics">design</emphasis> , HTML, og valg af <emphasis effect="italics">information</emphasis>, XML. Vi har på den ene side de data som vi vil præsentere, på den anden vores viden om de informationer som er repræsenteret i data og vores forestilling om hvordan vi kan <emphasis effect="italics">modellere</emphasis> disse informationer i XML. En bog er skrevet af en person, det vi normalt kalder FORFATTER, den har en TITEL og er udgivet af et FORLAG på et bestemt tidspunkt. Det er denne vores idé og forestilling om den typiske bog og tilhørende informationskategorier som vi fokuserer på i XML og sætter navn på ved hjælp af vores markører. </para>
+          <para id="id7324933">Det siger sig selv, at en browser ikke ved hvilke informationskategorier vi har i hovedet og anvender når vi opmærker i XML, uanset hvad vi opmærker. Modsat er det praktisk at den kan genkende og fortolke de markører som definerer præsentationen. Derfor er mængden af markører i HTML og deres betydning fastlagt på forhånd. Vi kan ikke lave om på dette og introducere vores egne markører<footnote id="id7324954">Fremover vil vi anvende den gængse engelske terminologi for markører: tags</footnote>. </para>
+          <para id="id7324969">XML derimod giver brugeren mulighed for lave og bruge sit eget opmærkningssprog i og med at vi skiller indholdet fra præsentationen. Et XML-dokument er <term>strukturerede data</term>, men også <term>struktureret information</term>. Strukturen er identisk med de tags der anvendes. De afspejler den informationsstruktur som<emphasis effect="italics"/>er indeholdt i de data der opmærkes som for eksempel i tilfældet med en bog. Hvis vi udveksler vores tags eller informationskategorier med hinanden, vil vi også kunne hente, bruge og genbruge oplysninger med samme struktur, og vi kan uden problemer vise det hele hvis det er pakket ind i HTML. </para>
+        </section>
+        <section id="id7325010">
+          <title>Test dig selv</title>
+          <para id="id7325017">Som afslutning på dette første modul følger et par opgaver som du kan bruge til at træne opmærkning. </para>
+          <para id="id7325024">Som det første skal du samle alle de oplysningstyper – informationskategorier – som efter din mening typisk er knyttet til beskrivelsen af en bog.</para>
+          <para id="id73250241">Lav en liste med de relevante begreber (forfatter, titel, forlag.....) og lav derefter en liste hvor begreberne er noteret som tags.</para>
+          
+          <para id="id7325048">Nedenfor finder du tre forskellige beskrivelser af tre forskellige bogtitler. </para>
+          <para id="id73250242">Sammenlign dine liste med de tre beskrivelser og udvid om nødvendigt listerne med nye kategorier, kategorier som du ikke har tænkt over i første omgang.</para>
+            <para id="id73250243">Kopiér en af teksterne over i dit tekstbehandlingssystem, indsæt dine tags i teksten og gem den som et XML-dokument, det vil sige som en fil med efternavnet xml, for eksempel: jørgen_leth.xml</para>
+            <example id="ex1" type="bog">
+            <para id="fs-id18625141"><emphasis effect="italics">Tekst 1: hentet hos Gentofte Kommunes Biblioteker:</emphasis> </para>
+          <para id="id7325116">Roman Anne Marie Løn. Sekstetten : roman / Anne Marie Løn. - [Kbh.] : Gyldendal, 2008. - 550 sider ISBN 978-87-02-07227-3 : hf. : kr. 299,00. </para>
+          <para id="id7325135">ISBN 978-87-02-07365-2 : ib. : kr. 349,00.</para>
+          </example>
+          <example id="ex2" type="bog"> 
+          <para id="id73250245"><emphasis effect="italics">Tekst 2: hentet hos Gentofte Kommunes Biblioteker: </emphasis></para>
+          <para id="id7325168">Lydbog, Biografi. Det uperfekte menneske / Jørgen Leth</para>
+          <para id="id7325220">Gyldendal Lyd, 2008-Forfatteren, filminstruktøren og Tour de France-eksperten Jørgen Leths (f. 1937) erindringsessays, hvori han beskriver øjeblikke i sit liv og omkostningerne ved at leve som æstetiker: rastløsheden, depressionerne og ensomheden.</para>
+          </example>
+          <example id="ex3" type="bog">
+          <para id="id73250246"><emphasis effect="italics">Tekst 3: hentet hos Gyldendals Bogklub (og derfor er det ikke sikkert at alle informationerne er relevante i din model!): </emphasis></para>
+          
+          <para id="id7325268">Jo Nesbø</para>
+          <para id="id7325272">Flagermusmanden</para>
+          <para id="id7325277">Klubpris: 149,- </para>
+          <para id="id7325281">Første bind i Jo Nesbøs suveræne krimi-serie om Harry Hole</para>
+          <para id="id7332723">Den norske kriminalbetjent Harry Hole sendes til Australien for at bistå i opklaringen af mordet på en ung, norsk kvinde. I lufthavnen mødes han af Andrew kensington, en aboriginal kriminalbetjent med en mindst ligeså broget fortid som ham selv. Sammen bevæger de sig rundt i Sydneys red light district, King's Cross, og forsøger at navigere efter de svage ekkoer fra en morder. Oversat af Allan Hilton Andersen efter Flaggermusmannen </para>
+             </example>
+            <para id="id732502465">Afslut denne første øvelse med at udskrive din færdige og endelige liste over informationskategorier og tilhørende tags knyttet til beskrivelsen af en bog.</para>
+            <para id="id7325024123">Hvordan vil du forklare forskellen i følgende udsagn:</para>
+          
+            <para id="id732502499">HTML er strukturerede data</para>
+            <para id="id732502488">XML er struktureret information</para>
+               </section>
+     
+  </content>
+</document>

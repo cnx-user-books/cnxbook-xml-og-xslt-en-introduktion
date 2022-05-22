@@ -1,0 +1,347 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Fra Informationsmodel til  en DTD</title>
+  <metadata>
+  <md:content-id>m19608</md:content-id><md:title>Fra Informationsmodel til  en DTD</md:title>
+  <md:abstract>En præsentation af opbygning og brug af en DTD med udgangspunkt i en informationsmodel</md:abstract>
+  <md:uuid>2d931600-69ba-418d-9b4d-382a4802c634</md:uuid>
+</metadata>
+
+<content>
+    <section id="id30497108">
+      <title>DTD – DOCUMENT TYPE DEFINITION</title>
+      <section id="id19047876">
+        <title>1. Dokument – informationsmodel – DTD</title>
+        <para id="id3330834">Udgangspunkt for fremstillingen i dette modul er det <term>XML-dokument</term> som er vist i fig.1 nedenfor. Vi vil gerne sikre os, at dokumenten er både <emphasis effect="italics">velformet</emphasis> og <emphasis effect="italics">gyldigt</emphasis>. <term>Velformet</term> er dokumentet, når det overholder de syntaksregler som gælder for XML <emphasis effect="italics"><footnote id="id4203751">jf. <link url="http://www.w3.org/TR/xml/">http://www.w3.org/TR/xml/</link></footnote></emphasis>. At et XML-dokument er <term>gyldigt</term>, vil sige at det er i overensstemmelse med en foreliggende standard for opmærkning, den standard som kaldes en <term>DTD, en Document Type Definition</term>.</para>
+        <para id="id31833177">En DTD fastlægger</para>
+        <list id="id3557935" list-type="bulleted">
+          <item>hvilke elementer der forekommer i et XML-dokument</item>
+          <item>hvor mange gange det enkelte element forekommer</item>
+          <item>i hvilken rækkefølge elementerne forekommer</item>
+        </list>
+        <para id="id10472184">I det følgende vil vi (1) anskue en DTD som en implementeret <term>informationsmodel</term>, dernæst (2) se nærmere på reglerne for hvordan man skal bygge og notere informationerne i en DTD, og endelig (3) se nærmere på hvordan en DTD bruges sammen med et XML-dokument.</para>
+      </section>
+      <section id="id18968318">
+        <title>2. Fra dokument til informationsmodel</title>
+        <section id="id4268376">
+          <title>2.1 Opmærkningen</title>
+          <para id="id31804172">Udgangspunkt er opmærkningen af nedenstående lydbog (ex1):</para>
+   
+   <figure id="figur1">
+   <label>Figur</label>
+   <code id="fs-id10897668" display="block">
+  
+&lt;online_katalog&gt; 
+
+  &lt;bog&gt; 
+
+    &lt;forfatter nation="dk"&gt;
+
+      &lt;fornavn&gt;Jørgen&lt;/fornavn&gt; 
+
+      &lt;efternavn&gt;Leth&lt;/efternavn&gt; 
+
+    &lt;/forfatter&gt;
+
+    &lt;impressum&gt;
+
+      &lt;titel&gt;Det uperfekte menneske&lt;/titel&gt; 
+
+      &lt;forlag sted="København"&gt;Gyldendal&lt;/forlag&gt; 
+
+      &lt;udgivet&gt;2007&lt;/udgivet&gt; 
+
+      &lt;ISBN format="lydbog" volumen="11T:36M"&gt;978-87-02-06068-3&lt;/ISBN&gt; 
+
+      &lt;pris&gt;kr. 298&lt;/pris&gt; 
+
+    &lt;/impressum&gt;
+
+    &lt;stof&gt; 
+
+      &lt;handling&gt;Cool, elegante, morsomme og selvudslettende 
+                      historier fra et uperfekt liv med litteratur,
+                      film, sport, kvinder og rejser. Digteren,
+                      filminstruktøren og Tour de France-kommentatoren
+                      m.m. har skrevet en erindringsbog af de sjældne,
+                      som samtidig tegner et portræt af dansk 
+                      kulturliv gennem de sidste 40 år. Jørgen Leths
+                      karakteristiske stemme fører lytteren gennem en
+                      af dette årtis mest omtalte bøger.&lt;/handling&gt; 
+
+      &lt;genre&gt;biografi&lt;/genre&gt; 
+
+      &lt;original_titel&gt; Det uperfekte Menneske &lt;/original_titel&gt; 
+
+    &lt;/stof&gt; 
+
+  &lt;/bog&gt; 
+
+&lt;/online_katalog&gt; 
+ 
+ </code>
+ </figure>
+
+
+
+
+          <para id="id3706296">Denne opmærkning vil vi gerne bruge som standard ved opmærkning af bogtitler. Det er derfor vigtigt at give en beskrivelse af denne standard således at alle nye og tilkomne titler følger samme opmærlning. Det kræver at der udarbejdes en oversigt over hvilke elementer og attributter der indgår i opmærkningen. En sådan oversigt kaldes også for en <term>informationsmodel </term>og har vi først uadarbejdet en informationsmodel, kan vi bruge denne som grundlag for at udvikle en DTD.</para>
+        </section>
+        <section id="id29807737">
+          <title>2.2 Informationsmodellen</title>
+          <para id="id29894909">Informationsmodellen kommer til at se således ud (ex2):</para>
+
+<figure id="figurmodel">
+<code id="fs-id9059920" display="block">
+
+1. BOG prototypen – strukturelement, container for den samlede beskrivelse af en bog
+
+  1.1 FORFATTER strukturelement; indgang til informationer om den 
+      aktuelle forfatter
+
+      ATTRIBUT: nation: angiver forfatters nationalitet
+
+      1.1.1 FORNAVN tekstelement; indeholder forfatterens fornavn
+
+      1.1.2 EFTERNAVN tekstelement; indeholder forfatterens efternavn
+
+  1.2 IMPRESSUM strukturelement; indgang til alle informationer
+      om bogens udgivelse
+
+      1.2.1 TITEL tekstelement; indeholder bogens titel
+
+      1.2.2 FORLAG tekstelement; indeholder navnet på forlaget
+
+            ATTRIBUT: sted: angiver hjemsted for forlaget
+
+      1.2.3 UDGIVET tekstelement; indeholder året for udgivelsen
+
+      1.2.4 ISBN tekstelement; indeholder bogens ISBN-nummer
+
+            ATTRIBUT: format: angiver udgivelsens format: 
+            ”heftet”, ”indbundet” eller ”lydbog”
+
+            ATTRIBUT: volumen: angiver sidetal eller varighed 
+            for en lydbog
+
+      1.2.5 PRIS tekstelement; indeholder indkøbspris
+
+  1.3 STOF strukturelement; indgang til informationer om en 
+      bogs handling, genre og orignaltitel
+
+      1.3.1 HANDLING tekstelement; indholder et indholdsresume,
+            typisk svarende til indholdet angivet på bogens bagside
+
+      1.3.2 GENRE tekstelement; indeholder angivelse af genre
+
+      1.3.3 ORIGINAL_TITEL tekstelement; indeholder angivelse 
+            af originaltitel, er specielt relevant for oversat litteratur
+
+</code>
+</figure>
+
+
+          <para id="id30044667">Med denne oversigt, det vi kalder en formaliseret informationsmodel, har vi dannet os et samlet overblik over elementerne i modellen, over relationerne mellem elementerne, og over mulige attributter i et standarddokument. Enhver ny bog som skal indgå i ONLINE_KATALOG skal beskrives og opmærkes som XML-dokument i henhold til modellen i ex2. </para>
+          <para id="id30180221">Næste skridt bliver at implementere beskrivelsen i form af en DTD som vi kan bruge til at <term>validere</term> alle nye beskrivelser. At validere et dokument vil sige at fastlægge om der er tale om et gyldigt XML-dokument, et dokument som lever op til standarden. </para>
+        </section>
+      </section>
+      <section id="id30385852">
+        <title>3. DTD: en implementeret standard for opmærkning</title>
+        <para id="id31243575">En DTD, en <emphasis effect="italics">Document Type Definition</emphasis>, er en standard, en <term>deklaration</term>, som angiver <emphasis effect="italics">hvilke navngivne elementer</emphasis> der kan forekomme i en bestemt type XML-dokumenter, <emphasis effect="italics">hvor mange gange</emphasis> elementerne forekommer, og <emphasis effect="italics">i hvilken rækkefølge</emphasis>. På denne måde deklarerer og standardiserer en DTD et særligt <term>vokabular</term>, mængden af navngivne elementer og eventueller attributter, og en særlig struktur, relationen mellem elementer, for forekomster af en type XML-dokumenter.</para>
+        <section id="id30758599">
+          <title>3.1 Syntaks</title>
+          <para id="id30100778">Der gælder en særlig syntaks for opbygningen af en DTD (jf. <link url="http://www.w3.org/TR/2008/REC-xml-20081126">http://www.w3.org/TR/2008/REC-xml-20081126</link> ):</para>
+          <list id="id19000598" list-type="enumerated" number-style="arabic">
+            <item>Alle elementer i en DTD beskrives inden for tegnene &lt; og &gt;, samme notation som gælder for angivelsen af tags i XML. </item>
+            <item>Med tegnet ’!ELEMENT’ angives at der er tale om en PI. </item>
+            <item>Betegnelsen ELEMENT er et reserveret ord i XML, forbeholdt denne funktion i en DTD. </item>
+          </list>
+          <para id="id29987806">En DTD indeholder en beskrivelse, en <term>elementdeklaration</term>, af alle elementer i et tilhørende XML-dokument efter følgende skabelon:</para>
+          <para id="id31852053">&lt;!ELEMENT elementnavn (indhold) &gt;</para>
+          <para id="id31852058">Som det første i en elementdeklaration anføres navnet på det element som skal deklareres. Læg mærke til at navn og ortografi for hvert enkelt element i en DTD skal matche den tilsvarende angivelser i XML-dokumentet og vice versa. Efter elementets navn anføres i parentes elementets indhold. Ved at se på indholdet i parentesen kan man konstatere om der er tale om et strukturelement eller et tekstelement.</para>
+          <para id="id30040863">Det vil blive illustreret med følgende eksempler:</para>
+          <para id="id9448774">3.1.1 Rodelementet</para>
+          <para id="id29905026">
+            <emphasis effect="bold">&lt;!ELEMENT</emphasis>
+            <emphasis effect="bold"> online_katalog ( (bog)+ ) &gt;</emphasis>
+          </para>
+          <para id="id28126186">Der findes ikke specielle regler for rækkefølgen af elementdeklarationer i en DTD. Men det kan anbefales at følge rækkefølgen i den formaliserede informationsmodel. Denne rækkefølge svarer til rækkefølgen i det tilhørende XML-dokument, og ved at følge denne er risikoen for at glemme eller overse et element ubetydelig.</para>
+          <para id="id31781576"/>
+          <para id="id28666178">Det første element som skal deklareres er derfor rodelementet. Navnet på elementet skal anføres og dernæst, anført i parentes, den eller de knuder i strukturen som er indlejret i rodelementet. </para>
+          <para id="id29961161">I det anførte eksempel er der kun ét indlejret element: elementet BOG. Der er mindst én forekomst, men forhåbentlig mange flere, af dette element. Det angives med en <term>hyppighedsoperator</term>: + som betyder: én eller flere forekomster af det element som står umiddelbart foran. Ved at bruge operatorer for hyppighed, kan man angive hvor mange gange et element skal forekomme. Står der ikke en operator efter et element, forekommer det én og kun én gang.</para>
+          <para id="id30086837">Vi kan læse notationen i fig.3 på følgende måde: elementet ONLINE_KATALOG er forældreknude (eng. <emphasis effect="italics">parent</emphasis>) til BOG, som er barn af (eng. <emphasis effect="italics">child</emphasis>) ONLINE_KATALOG. BOG forekommer én eller flere gange.</para>
+          <para id="id4003732">3.1.2 Strukturelementet</para>
+          <para id="id4003736">Elementet BOG er et strukturelement. Det fremgår af indholdet i parentesen som kun indeholder elementer. Det deklareres i princippet efter samme opskrift som ovenfor:</para>
+          <para id="id28699201">
+            <emphasis effect="bold">&lt;!ELEMENT</emphasis>
+            <emphasis effect="bold"> bog (forfatter, impressum, stof) &gt;</emphasis>
+          </para>
+          <para id="id29979095">Dette element har som vist tre indlejrede elementer, de elementer som er anført i parentesen. Der er i dette eksempel ikke nogen hyppighedsoperator anført for disse elementer, og det betyder at de forekommer én – og kun én gang. Rækkefølgen af elementer i parentesen foreskriver rækkefølgen af elementer i XML-dokumentet. Vi kan læse notationen på følgende måde: elementet BOG er forældreknude til børnene FORFATTER, IMPRESSUM og STOF. Disse tre elementer er børn af BOG og de er tillige søskende (eng. <emphasis effect="italics">siblings</emphasis>).</para>
+          <para id="id31714651">3.1.3 Tekstelementet</para>
+          <para id="id31714654">Som eksempel på et tekstelement kan vi bruge elementet FORNAVN:</para>
+          <para id="id29890541"><emphasis effect="bold">&lt;! ELEMENT fornavn (#PCDATA) &gt;</emphasis></para>
+          <para id="id31714658">Deklarationen siger i dette eksempel at elementet FORNAVN indeholder #PCDATA. Det betyder at indholdet i elementet er ren tekst. <term>PCDATA</term> betyder <emphasis effect="italics">Parsed Character Data</emphasis>, data som skal undersøges nærmere, parses, med henblik på at sikre at der ikke forekommer ulovlige tegn i teksten, det vil sige tegn som indgår i XMLs standardvokabular.</para>
+          <para id="id30193456">3.1.4 Attributter</para>
+          <para id="id29952957">Der gælder en særlig syntaks for angivelse af attributter i en DTD. De bygges over følgende skabelon:</para>
+          <para id="id29907419">
+            <emphasis effect="bold">&lt;!ATTLIST </emphasis>
+            <emphasis effect="italics">elementnavn attributnavn typeværdi forekomst</emphasis>
+            <emphasis effect="bold"> &gt;</emphasis>
+          </para>
+          <para id="id29913270">Et eller flere attributter anføres i en <term>attributliste</term>: ATTLIST. Som det første angives hvilket element attributtet er associeret med, dernæst navnet på attributtet, hvilken type der optræder som værdi for attributtet, og endelig en karakteristik af forekomsten, om der for eksempel er tale om et obligatorisk eller optionelt attribut.</para>
+          <para id="id31532983">Elementet FORFATTER indeholder et attribut:</para>
+          <para id="id30978490">
+            <emphasis effect="bold">&lt;!ELEMENT </emphasis>
+            <emphasis effect="bold">forfatter (fornavn, efternavn) &gt;</emphasis>
+          </para>
+          <para id="id3665818"><emphasis effect="bold">&lt;!ATTLIST forfatter</emphasis> </para>
+          <para id="id3665823"><emphasis effect="bold">nation CDATA #REQUIRED </emphasis></para>
+          <para id="id29879473"><emphasis effect="bold">&gt;</emphasis></para>
+          <para id="id29879478">FORFATTER er forældreknude til FORNAVN og EFTERNAVN, som dermed også er søskende. FORFATTER er med andre ord et <emphasis effect="italics">strukturelement</emphasis>. Men derudover kan vi se at der er et attribut knyttet til elementet. Det angives med en attributliste: ATTLIST – det kan jo tænkes at der er mere end et attribut – efterfulgt af navnet på det element som indeholder et attribut efterfulgt af navnet på selve attributtet. Af ovenstående fremgår altså at elementet FORFATTER har et attribut kaldet NATION. </para>
+          <para id="id9722285">Herefter skal der følge yderligere to angivelser: en angivelse af hvilken type oplysning der kan forekomme som værdi for attributtet, og en angivelse af hvornår attributtets værdi skal være udfyldt.</para>
+          <para id="id30176042">I det aktuelle eksempel: <emphasis effect="bold">nation CDATA #REQUIRED, </emphasis>står der umiddelbart efter attributtets navn som angivelse af typeværdi: <term>CDATA</term>. Denne oplysning betyder <emphasis effect="italics">Character Data</emphasis>. Det angiver at der er tale om data som – i modsætning til PCDATA – ikke skal parses af XML-processoren (hvad det vil sige, vender vi tilbage til i modul 4). Som sidste oplysning finder vi angivelsen:<term> #REQUIRED</term>. Det betyder at der <emphasis effect="italics">skal</emphasis> være en værdi angivet for dette attribut, værdiangivelsen er med andre ord obligatorisk, og der kan ikke forekomme en forfatter i vores onlinekatalog uden at der samtidig er en oplysning om vedkommendes nationalitet.</para>
+          <para id="id28104147">Et eksempel mere:</para>
+          <para id="id28104151"><emphasis effect="bold">&lt;!ELEMENT ISBN (#PCDATA) &gt;</emphasis></para>
+          <para id="id28104156"><emphasis effect="bold">&lt;!ATTLIST ISBN</emphasis></para>
+          <para id="id9722983">
+            <emphasis effect="bold">format  CDATA (tryk | lydbog) “tryk”</emphasis>
+          </para>
+          <para id="id29187274"><emphasis effect="bold">volumen  CDATA #REQUIRED </emphasis></para>
+          <para id="id29187280"><emphasis effect="bold">&gt;</emphasis></para>
+          <para id="id29960848">Elementet ISBN er et tekstelement. Det er angivet som: ISBN (#PCDATA), hvor PCDATA betegner data som parses, nemlig tekststrengen som angiver ISBN nummeret. Der må med andre ord ikke være tegn indeholdt i denne streng som er reserveret til brug i XML. </para>
+          <para id="id31968442">Elementet ISBN har desuden, som det fremgår af ATTLIST, to attributter, attributterne FORMAT og VOLUMEN. For begges vedkommende gælder at typeværdien er defineret til at være character data. Men der er en væsentlig forskel i angivelsen af værdiens forekomst. Som det umiddelbart fremgår, skal der anføres en værdi for attributet VOLUMEN – i XML-dokumentet vil det være en angivelse af enten et sidetal eller en lydbogs varighed. Denne værdi er obligatorisk, hvad der fremgår af notationen #REQUIRED. </para>
+          <para id="id4627677">Værdien for attributet FORMAT er derimod angivet som en oplistning af mulige værdier (eng. <emphasis effect="italics">enumerated type values</emphasis>): <emphasis effect="bold">format  CDATA (tryk | lydbog) “tryk”</emphasis></para>
+          <para id="id31417780">Værdien kan være enten <emphasis effect="italics">tryk</emphasis> eller <emphasis effect="italics">lydbog</emphasis> svarende til angivelsen i parentesen: (tryk | lydbog), altså en bog i enten papirformat eller en lydbog. Endvidere er der angivet en default-værdi, det vil sige en værdi som automatisk vil gælde, hvis opmærkeren har glemt at anføre en værdi. Default er tryk, hvad der nok er det mest almindelige, trods alt.</para>
+          <para id="id30193958">Vi kan konstatere at vi nu er i stand til at bygge en DTD med baggrund i en formaliseret informationsmodel.</para>
+          <para id="id27199201">Den samlede DTD ser ud som nedenfor vist i (ex3):</para>
+   <figure id="figur2">
+   <label>Figur</label>
+   <code id="fs-id21079625" display="block">     
+          &lt;!ELEMENT online_katalog ((bog+))&gt;
+          &lt;!ELEMENT bog ((forfatter, impressum, stof))&gt;
+          &lt;!ELEMENT forfatter ((fornavn, efternavn))&gt;
+          &lt;!ATTLIST forfatter
+          nation CDATA #REQUIRED
+          &gt;
+          &lt;!ELEMENT fornavn (#PCDATA)&gt;
+          &lt;!ELEMENT efternavn (#PCDATA)&gt;
+          &lt;!ELEMENT impressum ((titel, forlag, udgivet, ISBN, pris))&gt;
+          &lt;!ELEMENT titel (#PCDATA)&gt;
+          &lt;!ELEMENT forlag (#PCDATA)&gt;
+          &lt;!ATTLIST forlag
+          sted CDATA #REQUIRED
+          &gt;
+          &lt;!ELEMENT udgivet (#PCDATA)&gt;
+          &lt;!ELEMENT ISBN (#PCDATA)&gt;
+          &lt;!ATTLIST ISBN
+          format (tryk | lydbog) "tryk"
+          volumen CDATA #REQUIRED
+          &gt;
+          &lt;!ELEMENT pris (#PCDATA)&gt;
+          &lt;!ELEMENT stof ((handling, genre, original_titel))&gt;
+          &lt;!ELEMENT handling (#PCDATA)&gt;
+          &lt;!ELEMENT genre (#PCDATA)&gt;
+          &lt;!ELEMENT original_titel (#PCDATA)&gt;
+</code>
+</figure>
+          
+        </section>
+        <section id="id25222771">
+          <title>4. Validering af et XML-dokument med en DTD</title>
+          <para id="id31079625">Som det sidste skal vi se på hvordan man kan skabe en forbindelse mellem en DTD og et tilhørende XML-dokument således at det bliver muligt at validere opmærkningen i dokumentet. </para>
+          <para id="id30038991">Et XML-dokument er gyldigt hvis det matcher beskrivelsen af elementstruktur og indhold i en tilhørende DTD. Det vil med andre ord sige, at elementernes navne matcher, at rækkefølgen de forekommer i er den samme som beskrevet i DTD’en, og at de forekommer med samme hyppighed som angivet i DTD’en. </para>
+          <para id="id4615306">En DTD kan være <term>intern</term> i forhold til et XML-dokument eller den kan være <term>ekstern</term>. </para>
+          <list id="id31774438" list-type="enumerated" number-style="arabic">
+            <item>En intern DTD er placeret øverst i XML-dokumentet, DTD og opmærkning er i et og samme dokument eller i en og samme fil. </item>
+            <item>En ekstern DTD opbevares i et dokument for sig, i en særskilt fil med efternavnet *.dtd, for eksempel online.dtd. Den DTD som er vist ovenfor i fig. 3 er et eksempel på en ekstern DTD. </item>
+          </list>
+          <para id="id30032388">Om man nu vælger at bruge en intern eller en ekstern DTD, afhænger af mange ting. Vælger man en intern DTD, følges DTD og opmærkning altid ad. Det kan undertiden være praktisk, specielt hvis der er tale om mindre XML-dokumenter som er afsluttede helheder og som ikke skal udbygges yderligere. Vælger man en ekstern DTD, opnår man mange fordele. Først og fremmest kan man distribuere sin DTD og dermed muliggøre at flere personer kan sidde samtidigt forskellige steder og gennemføre en ensartet og konsistent opmærkning af dokumenter, som afslutningsvis kan samles i ét større dokument. </para>
+          <para id="id30039002">Forbindelsen mellem et <emphasis effect="italics">XML-dokument</emphasis> og <emphasis effect="italics">en ekstern DTD</emphasis> etableres i den del af dokumentet som også kaldes for prologen. Det er her i et XML-dokument at man finder alle deklarationerne. Det kommer til at se således ud:</para>
+          <para id="id9722909">
+            <emphasis effect="bold">1: &lt;?xml version="1.0" encoding="UTF-8"?&gt;</emphasis>
+          </para>
+          <para id="id9698754">
+            <emphasis effect="bold">2: &lt;!DOCTYPE online_katalog </emphasis>
+          </para>
+          <para id="id31125795">
+            <emphasis effect="bold">SYSTEM "d:\home\data\Altova Projects\online.dtd"&gt;</emphasis>
+          </para>
+          <para id="id30497121">I første linie har vi den traditionelle XML-erklæring. I linie 2 følger et navn samt en angivelse af at der er en DTD knyttet til dette XML-dokument og at denne ligger på systemniveau: SYSTEM, og at den findes på det sted som er angivet i den efterfølgende sti. Læg mærke til at denne deklaration følger den traditionelle PI-syntaks: &lt;!......&gt; og at den indeholder to reserverede ord: DOCTYPE og SYSTEM.</para>
+          <para id="id29684943">Læg endelig som det sidste mærke til at vores DTD har et internt navn: <emphasis effect="bold">online_katalog</emphasis>, det navn som står lige efter DOCTYPE, og at <emphasis>dette navn er og skal være identisk med navnet på rodelementet i XML-dokumentet</emphasis>.</para>
+          <para id="id29913917">Efter denne prolog følger resten af XML-dokumentet. Det kan nu udvides med flere forekomster af elementet BOG, og hver gang vi åbner dokumentet med en browser eller en anden form for XML-processor, bliver opmærkningen valideret. Det kan gøres for hver enkelt opmærkning decentralt og for hele kataloget centralt. Derfor er det en god idé at bruge en ekstern DTD!</para>
+          <para id="id28253923">Det nuværende dokument, klar til udvidelser og validering, ser således ud (ex.4):</para>
+
+<figure id="figur3">
+   <label>Figur</label>
+   <code id="fs-id108976689" display="block">
+  
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE online_katalog
+SYSTEM "d:\home\data\Altova Projects\nynetbog_online.dtd"&gt;
+
+&lt;online_katalog&gt; 
+
+  &lt;bog&gt; 
+
+    &lt;forfatter nation="dk"&gt;
+
+      &lt;fornavn&gt;Jørgen&lt;/fornavn&gt; 
+
+      &lt;efternavn&gt;Leth&lt;/efternavn&gt; 
+
+    &lt;/forfatter&gt;
+
+    &lt;impressum&gt;
+
+      &lt;titel&gt;Det uperfekte menneske&lt;/titel&gt; 
+
+      &lt;forlag sted="København"&gt;Gyldendal&lt;/forlag&gt; 
+
+      &lt;udgivet&gt;2007&lt;/udgivet&gt; 
+
+      &lt;ISBN format="lydbog" volumen="11T:36M"&gt;978-87-02-06068-3&lt;/ISBN&gt; 
+
+      &lt;pris&gt;kr. 298&lt;/pris&gt; 
+
+    &lt;/impressum&gt;
+
+    &lt;stof&gt; 
+
+      &lt;handling&gt;Cool, elegante, morsomme og selvudslettende 
+                      historier fra et uperfekt liv med litteratur,
+                      film, sport, kvinder og rejser. Digteren,
+                      filminstruktøren og Tour de France-kommentatoren
+                      m.m. har skrevet en erindringsbog af de sjældne,
+                      som samtidig tegner et portræt af dansk 
+                      kulturliv gennem de sidste 40 år. Jørgen Leths
+                      karakteristiske stemme fører lytteren gennem en
+                      af dette årtis mest omtalte bøger.&lt;/handling&gt; 
+
+      &lt;genre&gt;biografi&lt;/genre&gt; 
+
+      &lt;original_titel&gt; Det uperfekte Menneske &lt;/original_titel&gt; 
+
+    &lt;/stof&gt; 
+
+  &lt;/bog&gt; 
+
+&lt;/online_katalog&gt; 
+ 
+ </code>
+ </figure>
+
+
+
+
+          <para id="fs-id8545458">
+            <title>Test dig selv</title>
+          </para>
+          <para id="fs-id8731143">Vores XML-dokument,online_katalog.xml, og vores formaliserede   informationsmodel repræsenterer en og samme trætruktur. </para>
+          
+          <para id="fs-id8731145">Hvad vil det sige at der er tale om en træstruktur?</para>
+          <para id="fs-id8882005">I hvilken forstand kan man sige at der er tale om en repræsentation af en og samme træstruktur?</para>
+            <para id="fs-id8997162">Tegn den træstruktur som er implementeret i de tre forskellige repræsentationer</para>
+          </section>
+      </section>
+    </section>
+  </content>
+</document>

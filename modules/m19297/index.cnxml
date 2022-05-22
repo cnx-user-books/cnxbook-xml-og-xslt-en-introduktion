@@ -1,0 +1,169 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Fra XML til HTML med XSLT – en introduktion</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>29eac049-a33d-4903-892c-88eab2b02f67</md:uuid>
+</metadata>
+
+  <content>
+    <para id="p1"><title>Introduktion</title>
+    
+   I modsætning til HTML-dokumenter, der automatisk bliver vist med typografi og layout, når de åbnes i en browser som Internet Explorer eller Firefox, indeholder XML-dokumenter i sig selv normalt ingen information om, hvordan de skal visuelt skal fremstå, og vil derfor blot blive præsenteret i en form for ”rå kode”, når man åbner dem i en browser. Dette er helt tilsigtet: ideen med XML er blandt andet, at et XML-dokument skal kunne vises forskelligt, alt efter hvem målgruppen er, hvad konteksten er, eller hvilket medium dokumentet skal vises i. Og nogle gange skal et XML-dokument slet ikke præsenteres. Det gælder f.eks. i de tilfælde, hvor XML bliver brugt som format for udveksling af data mellem it-systemer, og hvor det overhovedet ikke er nødvendigt, at XML-dokumentet læses af et menneske. I andre tilfælde er en læsevenlig præsentation af XML-dokumenter helt nødvendig, f.eks. hvis de skal publiceres på Nettet og læses af en bruger i en browser. </para>
+
+<para id="p2"><title>Præsentation med CSS</title>
+
+Man kan give et XML-dokument en visuel form på forskellige måder. En ofte anvendt metode er at koble et CSS-stylesheet til XML-dokumentet. Et CSS-style sheet er et simpelt tekstdokument, der indeholder en række regler, som foreskriver, hvordan indholdet i XML-dokumentet typografisk og layoutmæssigt skal fremstå. I og med at et XML-dokument kan beskrives som en træstruktur, taler man nogle gange om, at et CSS-stylesheet ”pynter” XML-træet. CSS-style sheets er forholdsvis enkle og nemme at udarbejde, men har også visse begrænsninger. Eksempelvis er det vanskeligt med et CSS-style sheet at vise et XML-dokuments enkelte indholdselementer i en anden rækkefølge end den, de optræder i, i selve XML-dokumentet.</para>
+
+<para id="p3"><title>XSLT-stylesheets</title>
+Langt mere fleksible er XSLT-style sheets. Med et XSLT-style sheet kan man udtrække og vise XML-indhold på et utal af måder, til forskellige formål, og til diverse medier som f.eks. computerskærm eller mobiltelefon.  </para>
+
+<para id="p4">XSLT, en forkortelse for Extensible Style Language Transformations, er en slags programmeringssprog til behandling af XML-dokumenter. Programmer udarbejdet ved hjælp af XSLT kaldes for XSLT-scripts, XSLT-transforms eller XSLT-style sheets.  </para>
+
+<para id="p5">Et XSLT-style sheet er, lige som et CSS-style sheet, et tekstdokument med et sæt af regler. Disse regler er imidlertid ikke regler, som direkte beskriver, hvordan en given datastruktur i et XML-dokument skal præsenteres, men et sæt instrukser, der specificerer, hvordan denne datastruktur skal transformeres. Med et XSLT-style sheet kan man transformere et dokument i et XML-format til et andet; man kan lave det om til HTML, eller man kan konvertere det til en almindelig tekst. </para>
+
+<para id="p6"><title>Transformation af XML med XSLT</title>
+
+Et XML-dokument, der skal vises på Nettet, skal typisk transformeres til HTML eller XHTML, således at det kan vises i en browser. Rent konkret foregår en XML-til-HTML transformation ved, at en XML-processor, et stykke software, læser XSLT-style sheetet og gennemfører transformationen af XML-dokumentet, også kaldet kildedokumentet, som er foreskrevet i XSLT-style sheetet.  Transformationen kan ske på en webserver (”server side”), inden det sendes af sted til eller i slutbrugerens egen browser (”client side”). I begge tilfælde bliver der som output genereret (X)HTML-kode, som kan vises i en browser. Selve koblingen af XML-dokumentet og det tilhørende XSLT-stylesheet kan ske ad flere veje. Meget ofte vil der simpelthen være et link fra kildedokumentet til det style sheet, som XML-processoren skal benytte i forbindelse med transformationen. </para>
+
+<para id="p6b">(Se en <link url="http://en.wikipedia.org/wiki/File:XSLT_en.svg">visualisering</link> af, hvordan en XSLT-transformation foregår).</para>
+ 
+<para id="p7">Et XSLT-style sheet kan som sagt opfattes som en samling af transformationsregler. En transformationsregel omfatter normalt to instrukser: en instruks, der angiver, hvad der skal transformeres i kildedokumentet og en anden instruks, der specificerer, hvad resultatet af transformationen skal være. En transformationsregel til et bogkatalog i XML, der skal præsenteres på Nettet, kunne eksempelvis på (nogenlunde) mundret dansk lyde sådan her:
+
+<note type="transformationsregel" id="idm5526528"><label>Transformationsregel</label>Find alle krimiforfattere og præsenter dem i en nummereret liste.</note>
+
+</para>
+
+<para id="p8">I en XML-til-HTML transformation skulle denne instruks måske formuleres som:
+
+<note type="transformationsregel" id="idm19721840"><label>Transformationsregel</label>
+Find indholdet af elementet <emphasis>navn</emphasis> i alle <emphasis>forfatter</emphasis>-elementer, som findes i <emphasis>krimi</emphasis>-elementet i kildedokumentet og sæt det ind i et <emphasis>li</emphasis>-element i en <emphasis>ol</emphasis>. 
+
+</note>
+</para>
+
+<para id="p9">En sådan instruktion ville med andre ord konvertere en XML-datastruktur som:
+<code display="block" id="c1">
+
+&lt;krimi&gt;
+  &lt;forfatter&gt;
+   &lt;navn&gt;Jens Hansen&lt;/navn&gt;
+  &lt;/forfatter&gt;
+  &lt;forfatter&gt;
+   &lt;navn&gt;Hans Jensen&lt;/navn&gt;
+  &lt;/forfatter&gt;
+&lt;/krimi&gt;
+
+</code>
+
+til følgende HTML-output:
+
+<code display="block" id="c2">
+
+&lt;ol&gt;
+  &lt;li&gt;Jens Hansen&lt;/li&gt;
+  &lt;li&gt;Hans Jensen&lt;/li&gt;
+&lt;/ol&gt;
+
+</code>
+</para>
+
+
+<para id="p10"><title>Øvelse</title>
+
+
+Hvordan transformationsregler rent faktisk kodes i XSLT, og hvordan et XSLT-style sheet egentlig er opbygget, illustreres nedenfor gennem et konkret eksempel. Eksemplet indeholder et kildedokument i XML (en pressemeddelelse), et XSLT-style sheet og den HTML-kode, som genereres, når style sheetet appliceres på kildedokumentet i en XML-processor. Kig på kildedokument, style sheet og output og besvar de tilhørende spørgsmål:
+
+<code display="block" id="c3">
+
+&lt;?xml version="1.0"?&gt;
+&lt;?xml-stylesheet type="text/xsl" href="pressemeddelelse1.xsl"?&gt;
+&lt;pressemeddelelse&gt; 
+  &lt;dato&gt;12.12.2008&lt;/dato&gt; 
+  &lt;overskrift&gt;Ny dokumentstandard i Opdikt A/S &lt;/overskrift&gt; 
+  &lt;resume&gt;Opdikt A/S har i dag offentliggjort planer om at indføre XML som fælles dokumentstandard i hele organisationen&lt;/resume&gt; 
+  &lt;indhold&gt;På direktionens møde i dag blev det besluttet at indføre XML som   fælles format i virksomhedens Web-baserede kommunikation. 
+XML vil blive anvendt på virksomhedens intranet, i den	Web-baserede markedskommunikation og, sidst men ikke mindst, 
+som dataudvekslingsformat i forbindelse med e-handelstransaktioner. 
+Implementeringen af planen varetages af virksomhedens IT-afdeling 
+og forventes at løbe et halvt år.  &lt;/indhold&gt; 
+ &lt;kontaktperson&gt; 
+ &lt;fornavn&gt;Hans&lt;/fornavn&gt;
+ &lt;efternavn&gt;Jensen&lt;/efternavn&gt;
+ &lt;afdeling&gt;It-afdelingen&lt;/afdeling&gt;
+&lt;email&gt;hans@it.opdikt.dk&lt;/email&gt; 
+&lt;/kontaktperson&gt;
+&lt;/pressemeddelelse&gt;
+
+</code>
+
+
+<code display="block" id="c4">
+
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0"&gt;
+&lt;xsl:template match="/"&gt;
+    &lt;html&gt;
+      &lt;head&gt;
+        &lt;title&gt;Pressemeddelelse&lt;/title&gt;
+       &lt;/head&gt;
+      &lt;body&gt;
+       &lt;p style="font-size:24"&gt;Pressemeddelelse&lt;/p&gt;
+       &lt;p align="right"&gt;&lt;xsl:value-of select="pressemeddelelse/dato" /&gt;&lt;/p&gt;
+       &lt;p style="font-weight:bold; font-size:18"&gt;
+         &lt;xsl:value-of select="pressemeddelelse/overskrift" /&gt;&lt;/p&gt;
+       &lt;p&gt;&lt;i&gt;&lt;xsl:value-of select="pressemeddelelse/resume" /&gt;&lt;/i&gt;&lt;/p&gt;
+       &lt;p&gt;&lt;xsl:value-of select="pressemeddelelse/indhold" /&gt;&lt;/p&gt;
+       &lt;p&gt;&lt;b&gt;Kontakt:&lt;/b&gt;&lt;/p&gt;
+       &lt;p&gt;&lt;xsl:value-of select="pressemeddelelse/kontaktperson/fornavn" /&gt;
+         &lt;xsl:text&gt; &lt;/xsl:text&gt;
+       &lt;xsl:value-of select="pressemeddelelse/kontaktperson/efternavn" /&gt;
+         &lt;xsl:text&gt; &lt;/xsl:text&gt;
+      (email: &lt;xsl:value-of select="pressemeddelelse/kontaktperson/email" /&gt;)&lt;/p&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;
+  &lt;/xsl:template&gt;
+&lt;/xsl:stylesheet&gt;
+
+</code>
+
+<code display="block" id="c5">
+
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;META http-equiv="Content-Type" content="text/html; charset=utf-16"&gt;
+    &lt;title&gt;Pressemeddelelse&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p style="font-size:24"&gt;Pressemeddelelse&lt;/p&gt;
+    &lt;p align="right"&gt;12.12.2008&lt;/p&gt;
+    &lt;p style="font-weight:bold; font-size:18"&gt;Ny dokumentstandard i Opdikt A/S &lt;/p&gt;
+    &lt;p&gt;&lt;i&gt;Opdikt A/S har i dag offentliggjort planer om at indføre XML som
+	 fælles dokumentstandard i hele organisationen&lt;/i&gt;&lt;/p&gt;
+    &lt;p&gt; 
+På direktionens møde i dag blev det besluttet at indføre XML som fælles format i virksomhedens Web-baserede kommunikation. 
+XML vil blive anvendt på virksomhedens intranet, i den Web-baserede markedskommunikation og, sidst men ikke mindst, 
+som dataudvekslingsformat i forbindelse med e-handelstransaktioner. 
+Implementeringen af planen varetages af virksomhedens IT-afdeling  
+og forventes at løbe et halvt år.   &lt;/p&gt;
+    &lt;p&gt;&lt;b&gt;Kontakt:&lt;/b&gt;&lt;/p&gt;
+    &lt;p&gt;Hans Jensen (email: hans@it.opdikt.dk)&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+
+</code>
+
+
+</para>
+
+
+<para id="p11"><title>Spørgsmål</title> </para>
+<list id="l1" list-type="enumerated">
+<item>Hvordan kobles XML-dokument og XSLT-style sheet sammen?</item>
+<item>Kildedokumentet er i XML. Hvad med XSLT-style sheetet?</item>
+<item>Nogle elementer i style sheetet starter med ”forstavelsen” <emphasis>xsl</emphasis>, men andre ikke gør. Hvorfor mon?</item>
+<item>Hvilken instruks bruges i style sheetet til at udtrække data fra kildedokumentet?</item>
+<item>Hvordan lokaliseres det indhold i kildedokumentet, der skal udtrækkes?</item>  
+<item>Man taler nogle gange om, at XML-indhold ”pakkes ind” i HTML. Forklar denne metafor.</item>
+<item>Bliver alt indhold vist i HTML-outputtet? Hvorfor/hvorfor ikke?</item>
+</list>
+
+  </content>
+  
+</document>
